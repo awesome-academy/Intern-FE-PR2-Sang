@@ -4,14 +4,15 @@ import Space from "antd/lib/space";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  cleareMessageProduct,
-  deleteProduct,
-  getKeySearch,
-  getProductList,
-} from "../../../actions/product";
+// import {
+//   cleareMessageProduct,
+//   deleteProduct,
+//   getKeySearch,
+//   getProductList,
+// } from "../../../actions/product";
 import FormProduct from "./FormProduct";
 import "./style.scss";
+
 function ProductAdminPage(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -28,53 +29,49 @@ function ProductAdminPage(props) {
   });
 
   useEffect(() => {
-    dispatch(getProductList({ _page: "", _limit: 1000 }));
+    // dispatch(getProductList({ _page: "", _limit: 1000 }));
     if (
       products.isDeleteProductSuccess &&
       products.messageDeleteProduct === "success"
     ) {
-      message.success("Delete success");
-      dispatch(cleareMessageProduct());
+      message.success("Delete success")
+      // dispatch(cleareMessageProduct());
     }
     if (
       !products.isDeleteProductSuccess &&
       products.messageDeleteProduct === "error"
     ) {
-      message.error("Delete Error");
-      dispatch(cleareMessageProduct());
+      message.error("Delete Error")
+      // dispatch(cleareMessageProduct());
     }
-  }, [
-    dispatch,
-    products.isDeleteProductSuccess,
-    products.messageDeleteProduct,
-  ]);
+  }, [dispatch, products.isDeleteProductSuccess, products.messageDeleteProduct])
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [typeActionForm, setTypeActionForm] = useState();
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [typeActionForm, setTypeActionForm] = useState()
 
   const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
 
   const handleDeleteProduct = (vaule) => {
-    dispatch(deleteProduct(vaule.key));
-  };
+    // dispatch(deleteProduct(vaule.key));
+  }
 
   const handleEditProduct = (value) => {
-    setProductEditting(value);
-    setTypeActionForm("edit");
-    setIsModalVisible(true);
-  };
+    setProductEditting(value)
+    setTypeActionForm("edit")
+    setIsModalVisible(true)
+  }
 
   const handleAddProduct = () => {
-    setProductEditting({});
-    setIsModalVisible(true);
-    setTypeActionForm("add");
-  };
+    setProductEditting({})
+    setIsModalVisible(true)
+    setTypeActionForm("add")
+  }
 
   const handleKeySearch = (e) => {
-    dispatch(getKeySearch(e.target.value));
-  };
+    // dispatch(getKeySearch(e.target.value));
+  }
 
   function handleTableChange(pagination) {
     setPagination(pagination.current);
@@ -149,7 +146,7 @@ function ProductAdminPage(props) {
     },
   ];
 
-  const data = products.listProduct.map((item) => {
+  const data = [...products.listProduct].reverse().map((item) => {
     return {
       key: item.id,
       name: item.name,

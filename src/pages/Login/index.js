@@ -6,14 +6,14 @@ import Row from "react-bootstrap/Row";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { userLogin } from "../../actions/user";
+// import { userLogin } from "../../actions/user";
 import "./style.scss";
 
 function Login(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(user);
+
   useEffect(() => {
     if (!user.isLogin && user.errorLoginMessage) {
       message.warning(user.errorLoginMessage);
@@ -24,7 +24,7 @@ function Login(props) {
   }, [user]);
 
   const onFinish = (values) => {
-    dispatch(userLogin(values));
+    // dispatch(userLogin(values));
   };
 
   return (
